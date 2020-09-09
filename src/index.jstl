@@ -1,0 +1,3 @@
+<textarea class="list-input" name="input-list" id="" cols="30" rows="20" style="width:100%"></textarea>
+<button class="generate-ordered-traders-list-button">Order Traders List</button><button class="generate-ordered-wf-list-button">Order WF List</button>
+<textarea class="ordered-list-output"name="input-list" id="" cols="30" rows="20" style="width:100%"></textarea>
