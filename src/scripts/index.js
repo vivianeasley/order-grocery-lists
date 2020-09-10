@@ -5,10 +5,14 @@ const input = document.querySelector(".list-input");
 const generateTradersListButton = document.querySelector(".generate-ordered-traders-list-button");
 const generateWfListButton = document.querySelector(".generate-ordered-wf-list-button");
 const output = document.querySelector(".ordered-list-output");
+const printButton = document.querySelector(".generate-printable-button");
+
+let printableHTML = "";
 
 window.onload = function() {
     generateTradersListButton.addEventListener("click", ()=>{init("traders")}, false);
     generateWfListButton.addEventListener("click", ()=>{init("wholeFoods")}, false);
+    printButton.addEventListener("click", openPrintWindow, false);
 };
 function init (store) {
     const numberOfItems = {};
@@ -58,10 +62,17 @@ function init (store) {
     }
 
     let finalList = "";
+    printableHTML = "";
     for (let l = 0; l < zonedFoods2dArray.length; l++) {
         if (zonedFoods2dArray[l].length > 0) {
             const element = zonedFoods2dArray[l].join("\n");
             finalList = finalList + element + "\n\n\n-\n";
+            let htmlElement = ""
+            for (let m = 0; m < zonedFoods2dArray[l].length; m++) {
+                htmlElement = htmlElement + "<div>" + zonedFoods2dArray[l][m] + "</div>";
+
+            }
+            printableHTML = printableHTML + "<p>" + htmlElement + "- <p>";
         }
 
     }
@@ -86,4 +97,13 @@ function getNumberOfItems (string) {
         return string.match(regex);
     }
     return;
+}
+
+function openPrintWindow() {
+    console.log(printableHTML)
+    const printableWindow = window.open('','','width=300,height=300');
+    printableWindow.document.write(printableHTML);
+    printableWindow.document.close();
+    printableWindow.focus();
+    printableWindow.print();
 }
